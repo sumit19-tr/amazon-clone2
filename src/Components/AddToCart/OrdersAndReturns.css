@@ -1,0 +1,22 @@
+.orders-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 18px;
+}
+
+.orders-table thead th {
+  font-weight: 600;
+  font-size: 20px;
+  padding-bottom: 15px;
+  color: #333;
+}
+
+.orders-table tbody td {
+  padding: 18px 10px;
+  border-bottom: 1px solid #e5e5e5;
+  color: #444;
+}
+
+.orders-table tr:hover {
+  background: #f9f9f9;
+}

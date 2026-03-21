@@ -1,0 +1,157 @@
+/* Center box */
+.signin-box {
+  width: 380px;
+  margin: 40px auto;
+  padding: 25px 30px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fff;
+  background: #fff;
+  font-family: Arial, sans-serif;
+}
+
+.My_Alert { 
+  position: absolute;
+  left: 70%;
+  top: 23%;
+  width: 20%;
+}
+
+.signin-box h2 {
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.email-display {
+  /* padding: 10px; */
+  /* border: 1px solid #888;
+  border-radius: 5px;
+  margin-bottom: 15px; */
+  /* font-size: 10px; */
+}
+
+.email-display a {
+  float: right;
+  color: #0066c0;
+  font-size: 10px;
+}
+
+.forgot {
+  float: right;
+  margin-bottom: 5px;
+  color: #0066c0;
+  font-size: 14px;
+}
+
+.signin-btn {
+  background: #f7ca00;
+  border: 1px solid #a88734;
+  width: 100%;
+  padding: 5px;
+  border-radius: 20px;
+  font-weight: bold;
+  margin-top: 12px;
+}
+
+.passkey-btn {
+  width: 100%;
+  padding: 10px;
+  margin-top: 15px;
+  border: 1px solid #888;
+  border-radius: 20px;
+  background: white;
+}
+
+.divider {
+  text-align: center;
+  margin: 18px 0;
+  position: relative;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 40%;
+  height: 1px;
+  background: #ccc;
+}
+
+.divider::before {
+  left: 0;
+}
+
+.divider::after {
+  right: 0;
+}
+
+
+
+
+
+
+.signup-body {
+  background: #e3e6e6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: fit-content;
+}
+
+.signup-card {
+  width: 420px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.signup-btn {
+  background-color: #f7ca00;
+  font-weight: 600;
+  padding: 12px;
+  border-radius: 30px;
+}
+
+.signup-btn:hover {
+  background-color: #eeb800;
+}
+
+.login-btn {
+  background: transparent;
+  border: 1px solid #b8b8b8;
+  font-weight: 600;
+  padding: 12px;
+  border-radius: 30px;
+}
+
+.login-btn:hover {
+  background: #f4f4f4;
+}
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-content {
+  background: #fff;
+  padding: 20px 30px;
+  border-radius: 10px;
+  text-align: center;
+  width: 300px;
+}
+
+.popup-content button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background: #f7ca00;
+  border: none;
+  border-radius: 5px;
+}

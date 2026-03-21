@@ -1,0 +1,42 @@
+ .deal-card {
+     background-color: #fff;
+     border-radius: 6px;
+     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+     padding: 15px;
+     height: 100%;
+     display: flex;
+     flex-direction: column;
+     justify-content: space-between;
+ }
+
+ .deal-card h5 {
+     font-size: 18px;
+     margin-bottom: 10px;
+ }
+
+ .deal-grid {
+     display: grid;
+     grid-template-columns: repeat(2, 1fr);
+     gap: 10px;
+ }
+
+ .deal-item img {
+     width: 100%;
+     border-radius: 4px;
+ }
+
+ .deal-item p {
+     font-size: 14px;
+     margin-top: 5px;
+ }
+
+ .deal-card a {
+     color: #007185;
+     text-decoration: none;
+     font-size: 14px;
+     margin-top: 10px;
+ }
+
+ .deal-card a:hover {
+     color: #c7511f;
+ }
