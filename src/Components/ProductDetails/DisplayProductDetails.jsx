@@ -1,18 +1,26 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Footer from '../Footer/Footer';
 import { Tab, TabPanel, Tabs, TabList } from 'react-tabs';
 import "react-tabs/style/react-tabs.css";
 import axios from 'axios';
+import { cartContext } from '../context/context';
+import { Link, useNavigate } from 'react-router-dom';
 
 const AddToCartUrl = "https://amazonclone-loginapi.onrender.com/api/auth/add-id";
 
 
 const DisplayProductDetails = (props) => {
 
+  const {setCartCount} = useContext(cartContext);
+  let count = sessionStorage.getItem("countItems");
+  const navigate = useNavigate();
+
   const [message, setMessage] = useState();
   const [Style, setStyle] = useState({ display: "none" });
   const [AlertType, setalertType] = useState("alert alert-success");
   const [textType, setTextType] = useState("text-success");
+
+
 
   const handleAddToCart = async (product) => {
 
@@ -32,12 +40,18 @@ const DisplayProductDetails = (props) => {
 
        if (data.success === true) {
                 setStyle({ display: "flex" });
+                setTimeout(()=>{
+                  setStyle({ display:"none"});
+                },2000)
                 setMessage("Login successful");
                 setalertType("alert alert-success");
                 setTextType("text-success");
                 sessionStorage.setItem("login_token", data.msg);
                 sessionStorage.setItem("login alert", "Login successful");
                 console.log("data.msg", data.msg);
+                count++;
+                setCartCount(count);
+                console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>",count);                
             } else {
                 setStyle({ display: "flex" });
                 setMessage(data.msg);
@@ -106,9 +120,9 @@ const DisplayProductDetails = (props) => {
                   </TabPanel>
                 </Tabs>
                 <div className="d-grid gap-2 mt-4">
-                  <div className={`h3 pt-4 ${textType}`} >{message}</div>
+                  <div className={`h3 pt-4 ${textType}`}>{message}</div>
                   <button className="btn btn-cart btn-lg" onClick={() => handleAddToCart(items)}>Add to Cart</button>
-                  <button className="btn btn-buy btn-lg">Buy Now</button>
+                  <button className="btn btn-buy btn-lg"  onClick={navigate(`/order_for/${items.productId}`)}> Buy Now</button>
                 </div>
                 <p className="mt-3 mb-0 text-success fw-semibold">
                   Free Delivery: Tomorrow
