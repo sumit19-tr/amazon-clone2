@@ -55,7 +55,7 @@ const Login = () => {
                 sessionStorage.setItem("login_token", data.token);
                 sessionStorage.setItem("login alert", "Login successful");
                 console.log("data.token", data.token);
-                navigate('/');
+                navigate('/amazon-clone2');
             } else {
                 setStyle({ display: "flex" });
                 setMessage(data.token);

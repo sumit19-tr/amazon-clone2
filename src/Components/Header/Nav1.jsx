@@ -141,7 +141,7 @@ const Nav1 = () => {
         <>
             <nav className="s_Nav">
                 {/* Logo */}
-                <Link to="/" className="no-link-style">
+                <Link to="/amazon-clone2" className="no-link-style">
                     <div className="logo">
                         <img
                             src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg"
