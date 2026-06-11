@@ -155,7 +155,7 @@ const OrderFor = () => {
                         const formatedDate = date.toUTCString().split(' ').slice(1, 4).toString().replaceAll(',', '-');
 
                         // this.props.history.push(`/viewBooking?status=${status}&ORDERID=${this.state.orderId}&date=${formatedDate}&PAYMENTID=${response.razorpay_payment_id}`);
-                        navigate(`/order&returns?status=${status}&ORDERID=${orderId}&date=${formatedDate}&PAYMENTID=${response.razorpay_payment_id}`);
+                        navigate(`/amazon-clone2/order&returns?status=${status}&ORDERID=${orderId}&date=${formatedDate}&PAYMENTID=${response.razorpay_payment_id}`);
                     }
                     else {
                         toast.error("Payment verification failed.");

@@ -30,7 +30,7 @@ const Routing = () => {
                 <Route path="/productDetails/:productId" element={<ProductDetails/>}/>
                 <Route path="/add_to_cart" element={<AddToCart/>}/>
                 <Route path="/order_for"     element={<OrderFor/>}/>
-                <Route path="/order&returns" element={<OrdersAndReturns/>}/>
+                <Route path="/amazon-clone2/order&returns" element={<OrdersAndReturns/>}/>
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/register" element={<Register/>}/>
             </Routes>
