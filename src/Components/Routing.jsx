@@ -25,7 +25,7 @@ const Routing = () => {
             <cartContext.Provider value={{cartCount,setCartCount}}>
             <Header/>
             <Routes>
-                <Route path="/" element={<Home/>}/>
+                <Route path="/amazon-clone2" element={<Home/>}/>
                 <Route path="/products/:category_id" element={<Product/>}/>
                 <Route path="/productDetails/:productId" element={<ProductDetails/>}/>
                 <Route path="/add_to_cart" element={<AddToCart/>}/>
