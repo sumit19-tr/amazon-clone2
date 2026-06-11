@@ -10,11 +10,11 @@
   font-family: Arial, sans-serif;
 }
 
-.My_Alert { 
-  position: absolute;
-  left: 70%;
-  top: 23%;
-  width: 20%;
+.My_Alert {
+    position: absolute;
+    left: 43%;
+    top: 22%;
+    width: 20%;
 }
 
 .signin-box h2 {

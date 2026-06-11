@@ -13,14 +13,18 @@ const BrandFilter = ({ category_id, ListProductWrtBrand }) => {
 
     const [brandList, setBrandList] = useState([]);
     const [selectedBrand, setSelectedBrand] = useState([]);
+    const [loading,setLoading] = useState(false);
 
     const fetchBrandList = async () => {
         try {
+            setLoading(true);
             const res = await axios.get(`${curl}/${category_id}`);
             const data = await res.data;
             setBrandList(data[0].brand);
         } catch (error) {
-            console.log("error fecting brand list ", error);
+            console.log("error fecting brand list",error);
+        }finally{
+            setLoading(false);
         }
     }
 
@@ -83,7 +87,7 @@ const BrandFilter = ({ category_id, ListProductWrtBrand }) => {
     return (
         <>
             <ul className="filter-block" onChange={brandFilter}>
-                <DisplayBrandFilter brandList={brandList} />
+                <DisplayBrandFilter brandList={brandList} loading={loading} />
             </ul>
         </>
     )

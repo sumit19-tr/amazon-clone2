@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom'
 
 const Nav2Display = (props) => {
 
-    const categoriesList = ({category}) => {
-            if(category){
-                return category.map((items)=>{
-                    return(
+    const categoriesList = ({ category, loading }) => {
+        if (category && loading) {
+            if (category.length > 0) {
+                return category.map((items) => {
+                    return (
                         <li className="nav-item" key={items._id}>
                             <Link className="nav-link S_nav-link S_border" to={`/products/${items.id}`}>
                                 {items.category}
@@ -15,6 +16,21 @@ const Nav2Display = (props) => {
                     )
                 })
             }
+            else {
+                return (
+                    <>
+                        <h1>no data found </h1>
+                    </>
+                )
+            }
+        }
+        else {
+            return (
+                <>
+                    <h1>Loading...</h1>
+                </>
+            )
+        }
     }
 
     return (
@@ -33,7 +49,7 @@ const Nav2Display = (props) => {
                 </a>
                 <div className="collapse navbar-collapse" id="mynavbar">
                     <ul className="navbar-nav S_navbar-nav me-auto">
-                        
+
                         <li className="nav-item ">
                             <a
                                 className="nav-link S_nav-link S_border"

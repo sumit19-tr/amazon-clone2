@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './AddToCart.css'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios';
+import { cartContext } from '../context/context';
 
 const getItems_in_cartURL = "https://amazonclone-loginapi.onrender.com/api/auth/cart-items";// to get the items asper user what they have selected previously
 
@@ -11,78 +12,88 @@ const Delete_url = "https://amazonclone-loginapi.onrender.com/api/auth/removeIte
 
 const AddToCart = () => {
 
-    const [data,setData]= useState([]);
-    const [updatedQuantityCount,setUpdatedQuantityCount] = useState();
-    const [noOfItems,setNoOfItems]=useState();
-    const [sumOfItems,setSumOfItems]=useState();
+    const [data, setData] = useState([]);
+    const [updatedQuantityCount, setUpdatedQuantityCount] = useState();
+    const [noOfItems, setNoOfItems] = useState();
+    const [sumOfItems, setSumOfItems] = useState();
+    const [ItemsProductIds,setItemsProductIds] = useState();
+    
+    const value = useContext(cartContext);
 
-    const fetchData = async() =>{
+    const fetchData = async () => {
         try {
             const res = await axios.get(`${getItems_in_cartURL}/${sessionStorage.getItem("userInfo")}`);
             const cartItems = await res.data.data;
+            let productIdsOfItems = [];
+            cartItems.map(items => productIdsOfItems.push(items.productId));
+            setItemsProductIds(productIdsOfItems.toString());
             setData(cartItems);
-            console.log("fetch cart data test",cartItems);
+            console.log("fetch cart data test", cartItems);
             let countItems = cartItems.length;
-            sessionStorage.setItem("countItems",countItems);
-            console.log("countItems",countItems);
+            sessionStorage.setItem("countItems", countItems);
+            console.log("countItems", countItems);
             setNoOfItems(countItems);
-            let prizeOfItems = cartItems.reduce((acc,items) => acc + items.Price,0)
+            value.setCartCount(countItems);
+            let prizeOfItems = cartItems.reduce((acc, items) => acc + items.Price, 0)
             prizeOfItems = prizeOfItems.toLocaleString('en-IN');
             setSumOfItems(prizeOfItems);
-            console.log("prizeOfItems",prizeOfItems);    
+            console.log("prizeOfItems", prizeOfItems);
         } catch (error) {
-            console.error('Error fetching category data',error);            
+            console.error('Error fetching category data', error);
         }
     }
 
-    const handleIncreaseQuantity= async(productId,Quantity) => {
+    const handleIncreaseQuantity = async (productId, Quantity) => {
         try {
-            const updatedQuantity = Quantity+1;
-            await axios.put(`${UQ_url}/${sessionStorage.getItem("userInfo")}`,{"Quantity":updatedQuantity,"productId":productId});
+            const updatedQuantity = Quantity + 1;
+            await axios.put(`${UQ_url}/${sessionStorage.getItem("userInfo")}`, { "Quantity": updatedQuantity, "productId": productId });
             setUpdatedQuantityCount(updatedQuantity);
             console.log("Quantity increased Successfully");
         } catch (error) {
-            console.error("error while in adding quantity",error);
-                        
+            console.error("error while in adding quantity", error);
+
         }
     }
 
-    const handleDecreaseQuantity = async(productId,Quantity) => {
+    const handleDecreaseQuantity = async (productId, Quantity) => {
         try {
-            if(Quantity===1){
+            if (Quantity === 1) {
                 handleDelete(productId);
             }
-            else{
-                const updatedQuantity = Quantity-1;
-                await axios.put(`${UQ_url}/${sessionStorage.getItem("userInfo")}`,{"Quantity":updatedQuantity,"productId":productId});
+            else {
+                const updatedQuantity = Quantity - 1;
+                await axios.put(`${UQ_url}/${sessionStorage.getItem("userInfo")}`, { "Quantity": updatedQuantity, "productId": productId });
                 setUpdatedQuantityCount(updatedQuantity);
-                console.log("Quantity decreased Successfully ");   
+                console.log("Quantity decreased Successfully");
             }
         } catch (error) {
-            console.error("error while in adding quantity",error);
+            console.error("error while in adding quantity", error);
         }
     }
 
-    const handleDelete = async(productId) => {
+    const handleDelete = async (productId) => {
         try {
             let res = await axios.delete(`${Delete_url}/${productId}`);
             let res1 = await res.data;
-            console.log(productId,res1);
+            console.log(productId, res1);
             setUpdatedQuantityCount(productId);
         } catch (error) {
-            console.error("error whiele removing the items from cart");
+            console.error("error while removing the items from cart");
         }
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         fetchData();
-    },[updatedQuantityCount])
+        console.log(">>>>>>ItemsProductIds",ItemsProductIds);
+        
+    }, [updatedQuantityCount])
 
-    const renderData = (data) =>{
-        if(data){
-            if(data.length>0){
-                return data.map((item)=>{
-                    return(
+    const renderData = (data) => {
+        
+        if (data) {
+            if (data.length > 0) {
+                return data.map((item) => {
+                    return (
                         <>
                             <div className="cart-item d-flex">
                                 <div className="me-3">
@@ -91,13 +102,16 @@ const AddToCart = () => {
                                         defaultChecked=""
                                         className="form-check-input mb-3"
                                     />
-                                    <img
-                                        src={`${item.Image}`}
-                                        className="item-img"
-                                    />
+                                    <Link to={`/productDetails/${item.productId}`}>
+                                        <img
+                                            src={`${item.Image}`}
+                                            className="item-img"
+                                        /></Link>
                                 </div>
                                 <div className="flex-grow-1">
-                                    <h5>{item.product_name}</h5>
+                                    <Link className="AddToCart-Product-Link" to={`/productDetails/${item.productId}`}>
+                                        <h5>{item.product_name}</h5>
+                                    </Link>
                                     <span className="badge bg-warning text-dark">#1 Best Seller</span>
                                     <p className="text-success mt-1">In stock</p>
                                     <p className="text-muted small mb-1">Sold by Nehal Trading Company</p>
@@ -106,9 +120,9 @@ const AddToCart = () => {
                                     </p>
                                     {/* Quantity */}
                                     <div className="d-flex align-items-center my-2">
-                                        <div className="qty-btn" onClick={() => handleDecreaseQuantity(item.productId,item.Quantity)}>−</div>
+                                        <div className="qty-btn" onClick={() => handleDecreaseQuantity(item.productId, item.Quantity)}>−</div>
                                         <div className="mx-3">{item.Quantity}</div>
-                                        <div className="qty-btn" onClick={() => handleIncreaseQuantity(item.productId,item.Quantity)}>+</div>
+                                        <div className="qty-btn" onClick={() => handleIncreaseQuantity(item.productId, item.Quantity)}>+</div>
                                     </div>
                                     {/* Actions */}
                                     <span className="delete-text" onClick={() => handleDelete(item.productId)}>Delete</span>
@@ -123,7 +137,7 @@ const AddToCart = () => {
                 })
             }
         }
-    } 
+    }
 
 
     return (
@@ -145,7 +159,7 @@ const AddToCart = () => {
                                 <span className="ms-2">This order contains a gift</span>
                             </div>
                             <h5 className="fw-bold mt-3">Subtotal ({noOfItems} items): ₹{sumOfItems}</h5>
-                            <Link to="/order_for" className='no-link-style'>
+                            <Link to={`/order_for?id=${ItemsProductIds}`} className='no-link-style'>
                                 <button className="btn proceed-btn w-100 mt-3">Proceed to Buy</button>
                             </Link>
                             <div className="text-center mt-3">

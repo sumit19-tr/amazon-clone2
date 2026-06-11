@@ -1,6 +1,8 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate} from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { cartContext, loginContext } from "../context/context";
+import SearchBar from "./SearchBar";
 
 const getUserData_url = "https://amazonclone-loginapi.onrender.com/api/auth/userinfo";
 
@@ -8,34 +10,30 @@ const Nav1 = () => {
 
     const [style, setStyle] = useState({ display: "none" });
     const [cartStyle, setCartStyle] = useState({ display: "none" });
-    const [selectedCategory, setSelectedCategory] = useState("All");
+    
+    
     const [userData, setUserData] = useState({});
+    const getItems_in_cartURL = "https://amazonclone-loginapi.onrender.com/api/auth/cart-items"
     const location = useLocation();
     const navigation = useNavigate();
-
-
-    const categories = [
-        "All",
-        "Electronics",
-        "Books",
-        "Fashion",
-        "Mobiles",
-        "Home & Kitchen"
-    ]
+    const {isLoggedIn,setIsLoggedIn,user,setUser} = useContext(loginContext);
+    const {cartCount,setCartCount} = useContext(cartContext);
+  
 
     useEffect(() => {
 
+        console.log("value.cartCount", cartCount);
+
         const token = sessionStorage.getItem("login_token");
 
-        if (!token) {
-            setUserData({});
-            return;
-        }
+        // if (!token) {
+        //     setUserData({});
+        //     return;
+        // }
 
         const getUserData = async () => {
             try {
                 if (token) {
-
                     const res = await axios.get(getUserData_url, {
                         headers: {
                             'x-access-token': token
@@ -43,34 +41,38 @@ const Nav1 = () => {
                     })
                     const data = res.data;
                     setUserData(data);
-                    setCartStyle({display:"block"});
+                    setUser(data);
+                    setCartStyle({ display: "block" });
                     console.log("userData>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>", data);
+                    const res2 = await axios.get(`${getItems_in_cartURL}/${data.name}`);
+                    const cartItems = await res2.data.data;
+                    let countItems = cartItems.length;
+                    setCartCount(countItems);
                 }
-
             } catch (error) {
                 console.log(error, "error while fetching login userData");
             }
         }
         getUserData();
-
     }, [location])
 
 
     const logOut = () => {
         sessionStorage.removeItem("login_token");
         setUserData({});
+        setUser(null);
+        setIsLoggedIn(null);
         navigation('/');
         sessionStorage.setItem("login alert", "Logged Out");
-        setCartStyle({display:"none"});
+        setCartStyle({ display: "none" });
     }
 
-    const handleOrders = (e) =>{
-        if(!sessionStorage.getItem("login_token")){
+    const handleOrders = (e) => {
+        if (!sessionStorage.getItem("login_token")) {
             navigation('/login');
             console.log("/login");
-            
         }
-        else{
+        else {
             navigation('/order&returns');
             console.log("/order&returns");
         }
@@ -83,7 +85,7 @@ const Nav1 = () => {
             console.log("userData.name", userData.name);
 
             const fullname = userData.name;
-            sessionStorage.setItem("userInfo",fullname);
+            sessionStorage.setItem("userInfo", userData.name);
             console.log("fullname ", fullname);
 
             let firstName = fullname.split(' ')[0];
@@ -98,7 +100,7 @@ const Nav1 = () => {
 
             return (
                 <>
-                    <div className="choose_country S_border" onClick={logOut}>
+                    <div className="choose_country  S_border-logout-btn" onClick={logOut} >
                         LogOut
                     </div>
                     <Link to="/login" className="no-link-style">
@@ -135,33 +137,6 @@ const Nav1 = () => {
         }
     }
 
-    // Toggle dropdown
-    const handleAddStyle = (e) => {
-        e.stopPropagation(); //prevent immediate close
-        setStyle((prev) =>
-            prev.display === "none" ? { display: "block" } : { display: "none" }
-        );
-    }
-
-    // Select category
-    const handleSelect = (cat) => {
-        setSelectedCategory(cat);
-        setStyle({ display: "none" })//hide after selecting
-    }
-
-    
-
-    //Close dropdown on outside click
-    useEffect(() => {
-        const handleClickOutside = () => {
-            setStyle({ display: "none" });
-        }
-
-        document.addEventListener("click", handleClickOutside);
-        return () => document.removeEventListener("click", handleClickOutside);
-
-    }, [])
-
     return (
         <>
             <nav className="s_Nav">
@@ -186,34 +161,12 @@ const Nav1 = () => {
                 </div>
 
                 {/* ========== SEARCH ========= */}
-                <div className="search_box">
-                    {/* Category dropdown */}
-                    <div className="dropdown">
-                        <button className="search_cat" onClick={handleAddStyle}>
-                            <span >{selectedCategory}</span>
-                            <i className="fa-solid fa-caret-down" />
-                            <ul className="dropdown_menu" style={style} onClick={(e) => e.stopPropagation()}>
-                                {categories.map((cat) => (
-                                    <li key={cat} onClick={() => handleSelect(cat)} >
-                                        {cat}
-                                    </li>
-                                )
-                                )}
-                            </ul>
-                        </button>
-                    </div>
-                    {/* text input */}
-                    <input type="text" placeholder="Search Amazon.in" />
-                    {/* magnifying-glass icon */}
-                    <button className="search_btn">
-                        <i className="fa-solid fa-magnifying-glass" />
-                    </button>
-                </div>
+                <SearchBar/>
                 {/* Language / Country */}
-
                 {/* Account */}
                 {conditionalHeader()}
-                {/* <Link to="/login" className="no-link-style">
+                {/* 
+                <Link to="/login" className="no-link-style">
                 <div className="ac_info S_ln-height S_border">
                     <p className="first-line">Hello, sign in</p>
                     <p className="second-line">
@@ -221,21 +174,21 @@ const Nav1 = () => {
                         <i className="fa-solid fa-caret-down" />
                     </p>
                 </div>
-                </Link> */}
+                </Link> */
+                }
                 {/* Orders */}
                 <Link to={sessionStorage.getItem("login_token") ? "/order&returns" : "/login"} className="no-link-style" style={cartStyle}>
-                    <div  className="orders S_ln-height S_border" >
+                    <div className="orders S_ln-height S_border" >
                         <p className="first-line">Returns</p>
                         <p className="second-line">&amp; Orders</p>
                     </div>
                 </Link>
                 {/* Cart */}
-                
                 <Link to={sessionStorage.getItem("login_token") ? "/add_to_cart" : "/login"} className="no-link-style" style={cartStyle} >
                     <div className="cart-container cart S_border">
                         <div className="cart-icon-wrapper">
                             <i className="fa-solid fa-cart-shopping" />
-                            <span className="cart-count">{ sessionStorage.getItem("countItems")?sessionStorage.getItem("countItems"):0}</span>
+                            <span className="cart-count">{cartCount}</span>
                         </div>
                         <p className="cart-text">
                             Cart

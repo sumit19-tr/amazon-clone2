@@ -2,27 +2,35 @@ import React from 'react'
 
 const DisplayBrandFilter = (props) => {
 
-    const renderData = ({ brandList }) => {
+    const renderData = ({ brandList ,loading}) => {
 
-        if (brandList) {
-            return brandList.map((items) => {
+        if (brandList && !loading) {
+            if (brandList.length > 0) {
+                return brandList.map((items) => {
+                    return (
+                        <li key={items.brand_id}>
+                            <label>
+                                <input type="checkbox" name={items.brand_name} id={items.brand_id} value={items.brand_id} /> {`${items.brand_name}`}
+                            </label>
+                        </li>
+                    )
+                })
+            }
+            else {
                 return (
-                    <li key={items.brand_id}>
-                        <label>
-                            <input type="checkbox" name={items.brand_name} id={items.brand_id} value={items.brand_id} /> {`${items.brand_name}`}
-                        </label>
-                    </li>
+                    <>
+                        <h1>no data found</h1>
+                    </>
                 )
-            })
+            }
         }
-        else {
+        else{
             return (
-                <>
-                    <h1>no data found </h1>
-                </>
-            )
+                    <>
+                        <h1>Loading...</h1>
+                    </>
+                )   
         }
-
     }
 
     return (
@@ -31,6 +39,8 @@ const DisplayBrandFilter = (props) => {
             {renderData(props)}
         </>
     )
+
 }
+
 
 export default DisplayBrandFilter

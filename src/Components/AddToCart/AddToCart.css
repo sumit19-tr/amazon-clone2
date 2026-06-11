@@ -51,3 +51,8 @@
     font-weight: 600;
     padding: 10px;
 }
+
+.AddToCart-Product-Link{
+    text-decoration: none !important;
+    color: black;
+}

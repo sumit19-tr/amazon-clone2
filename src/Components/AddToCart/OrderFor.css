@@ -81,3 +81,8 @@
   background-color: #1e7e34;
   transform: translateY(-2px);
 }
+
+.d-flex {
+    display: flex !important;
+    flex-wrap: wrap;
+}
