@@ -177,7 +177,7 @@ const Nav1 = () => {
                 </Link> */
                 }
                 {/* Orders */}
-                <Link to={sessionStorage.getItem("login_token") ? "/order&returns" : "/login"} className="no-link-style" style={cartStyle}>
+                <Link to={sessionStorage.getItem("login_token") ? "/amazon-clone2/order&returns" : "/login"} className="no-link-style" style={cartStyle}>
                     <div className="orders S_ln-height S_border" >
                         <p className="first-line">Returns</p>
                         <p className="second-line">&amp; Orders</p>
