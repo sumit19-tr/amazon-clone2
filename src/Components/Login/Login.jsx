@@ -103,7 +103,7 @@ const Login = () => {
                             <span>or</span>
                             <hr className="flex-grow-1" />
                         </div>
-                        <button className="btn login-btn w-100" onClick={() => navigate("/register")}>
+                        <button className="btn login-btn w-100" onClick={() => navigate("/amazon-clone2/register")}>
                             Don't have an account? Sign up
                         </button>
                     </div>

@@ -9,7 +9,7 @@ const Nav2Display = (props) => {
                 return category.map((items) => {
                     return (
                         <li className="nav-item" key={items._id}>
-                            <Link className="nav-link S_nav-link S_border" to={`/products/${items.id}`}>
+                            <Link className="nav-link S_nav-link S_border" to={`/amazon-clone2/products/${items.id}`}>
                                 {items.category}
                             </Link>
                         </li>

@@ -10,7 +10,7 @@ const ProductList = (props) => {
                 return (
                     <>
                         <div className="col-6 col-md-4 col-lg-3">
-                            <Link to={`/productDetails/${items.productId}`} className='no-link-style'>
+                            <Link to={`/amazon-clone2/productDetails/${items.productId}`} className='no-link-style'>
                                 <div className="product-card">
                                     <img    
                                         src={items.Image}

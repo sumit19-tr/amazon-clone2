@@ -26,13 +26,13 @@ const Routing = () => {
             <Header/>
             <Routes>
                 <Route path="/amazon-clone2" element={<Home/>}/>
-                <Route path="/products/:category_id" element={<Product/>}/>
-                <Route path="/productDetails/:productId" element={<ProductDetails/>}/>
-                <Route path="/add_to_cart" element={<AddToCart/>}/>
-                <Route path="/order_for"     element={<OrderFor/>}/>
+                <Route path="/amazon-clone2/products/:category_id" element={<Product/>}/>
+                <Route path="/amazon-clone2/productDetails/:productId" element={<ProductDetails/>}/>
+                <Route path="/amazon-clone2/add_to_cart" element={<AddToCart/>}/>
+                <Route path="/amazon-clone2/order_for"     element={<OrderFor/>}/>
                 <Route path="/amazon-clone2/order&returns" element={<OrdersAndReturns/>}/>
-                <Route path="/login" element={<Login/>}/>
-                <Route path="/register" element={<Register/>}/>
+                <Route path="/amazon-clone2/login" element={<Login/>}/>
+                <Route path="/amazon-clone2/register" element={<Register/>}/>
             </Routes>
             </cartContext.Provider>
             </loginContext.Provider>

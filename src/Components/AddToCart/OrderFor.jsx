@@ -238,7 +238,7 @@ const OrderFor = () => {
                         </div>
 
                         <div className="mt-4 d-flex gap-3">
-                            <button className="btn edit-btn px-4" style={idArray.length>1 ? {display:"flex"} : {display:"none"}} onClick={() => navigate("/add_to_cart")}> Edit Items in cart</button>
+                            <button className="btn edit-btn px-4" style={idArray.length>1 ? {display:"flex"} : {display:"none"}} onClick={() => navigate("/amazon-clone2/add_to_cart")}> Edit Items in cart</button>
                             <button className="btn edit-btn px-4" style={idArray.length===1 ? {display:"flex"} : {display:"none"}} onClick={() => navigate(-1)}>back</button>
                             <button className="btn order-btn px-4" onClick={() => handlePayment(amount)} >{loading ?
                                 (<>

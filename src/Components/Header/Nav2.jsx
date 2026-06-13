@@ -22,7 +22,6 @@ const Nav2 = () => {
         .finally(()=>
             setLoading(true)
         );
-        
     },[])
 
     return (

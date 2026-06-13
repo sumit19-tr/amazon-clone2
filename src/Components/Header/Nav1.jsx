@@ -69,8 +69,8 @@ const Nav1 = () => {
 
     const handleOrders = (e) => {
         if (!sessionStorage.getItem("login_token")) {
-            navigation('/login');
-            console.log("/login");
+            navigation('/amazon-clone2/login');
+            console.log("/amazon-clone2/login");
         }
         else {
             navigation('/order&returns');
@@ -103,7 +103,7 @@ const Nav1 = () => {
                     <div className="choose_country  S_border-logout-btn" onClick={logOut} >
                         LogOut
                     </div>
-                    <Link to="/login" className="no-link-style">
+                    <Link to="/amazon-clone2/login" className="no-link-style">
                         <div className="ac_info S_ln-height S_border">
                             <p className="first-line">Hello,{name}</p>
                             <p className="second-line">
@@ -123,7 +123,7 @@ const Nav1 = () => {
                         <img src="https://flagcdn.com/w20/in.png" alt="India flag" height={20} /> IN
                         EN US
                     </div>
-                    <Link to="/login" className="no-link-style">
+                    <Link to="/amazon-clone2/login" className="no-link-style">
                         <div className="ac_info S_ln-height S_border">
                             <p className="first-line">Hello, sign in</p>
                             <p className="second-line">
@@ -166,7 +166,7 @@ const Nav1 = () => {
                 {/* Account */}
                 {conditionalHeader()}
                 {/* 
-                <Link to="/login" className="no-link-style">
+                <Link to="/amazon-clone2/login" className="no-link-style">
                 <div className="ac_info S_ln-height S_border">
                     <p className="first-line">Hello, sign in</p>
                     <p className="second-line">
@@ -177,14 +177,14 @@ const Nav1 = () => {
                 </Link> */
                 }
                 {/* Orders */}
-                <Link to={sessionStorage.getItem("login_token") ? "/amazon-clone2/order&returns" : "/login"} className="no-link-style" style={cartStyle}>
+                <Link to={sessionStorage.getItem("login_token") ? "/amazon-clone2/order&returns" : "/amazon-clone2/login"} className="no-link-style" style={cartStyle}>
                     <div className="orders S_ln-height S_border" >
                         <p className="first-line">Returns</p>
                         <p className="second-line">&amp; Orders</p>
                     </div>
                 </Link>
                 {/* Cart */}
-                <Link to={sessionStorage.getItem("login_token") ? "/add_to_cart" : "/login"} className="no-link-style" style={cartStyle} >
+                <Link to={sessionStorage.getItem("login_token") ? "/amazon-clone2/add_to_cart" : "/amazon-clone2/login"} className="no-link-style" style={cartStyle} >
                     <div className="cart-container cart S_border">
                         <div className="cart-icon-wrapper">
                             <i className="fa-solid fa-cart-shopping" />

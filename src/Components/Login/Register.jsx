@@ -46,7 +46,7 @@ const Register = () => {
             setPopupStyle({display:"none"});
         }
         else{
-            navigate('/login');
+            navigate('/amazon-clone2/login');
         }
     }
    

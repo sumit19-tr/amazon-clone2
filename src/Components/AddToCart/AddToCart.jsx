@@ -102,14 +102,14 @@ const AddToCart = () => {
                                         defaultChecked=""
                                         className="form-check-input mb-3"
                                     />
-                                    <Link to={`/productDetails/${item.productId}`}>
+                                    <Link to={`/amazon-clone2/productDetails/${item.productId}`}>
                                         <img
                                             src={`${item.Image}`}
                                             className="item-img"
                                         /></Link>
                                 </div>
                                 <div className="flex-grow-1">
-                                    <Link className="AddToCart-Product-Link" to={`/productDetails/${item.productId}`}>
+                                    <Link className="AddToCart-Product-Link" to={`/amazon-clone2/productDetails/${item.productId}`}>
                                         <h5>{item.product_name}</h5>
                                     </Link>
                                     <span className="badge bg-warning text-dark">#1 Best Seller</span>
@@ -159,7 +159,7 @@ const AddToCart = () => {
                                 <span className="ms-2">This order contains a gift</span>
                             </div>
                             <h5 className="fw-bold mt-3">Subtotal ({noOfItems} items): ₹{sumOfItems}</h5>
-                            <Link to={`/order_for?id=${ItemsProductIds}`} className='no-link-style'>
+                            <Link to={`/amazon-clone2/order_for?id=${ItemsProductIds}`} className='no-link-style'>
                                 <button className="btn proceed-btn w-100 mt-3">Proceed to Buy</button>
                             </Link>
                             <div className="text-center mt-3">
