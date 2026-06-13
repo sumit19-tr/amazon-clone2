@@ -62,7 +62,7 @@ const Nav1 = () => {
         setUserData({});
         setUser(null);
         setIsLoggedIn(null);
-        navigation('/');
+        navigation('/amazon-clone2');
         sessionStorage.setItem("login alert", "Logged Out");
         setCartStyle({ display: "none" });
     }

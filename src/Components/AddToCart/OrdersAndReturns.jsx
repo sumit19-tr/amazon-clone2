@@ -13,8 +13,6 @@ function OrdersAndReturns() {
 
     const location = useLocation();
 
-    
-
     useEffect(() => {
         
         const fetchData = async () => {
@@ -56,7 +54,6 @@ function OrdersAndReturns() {
                         const res2data = await res2.data;
                         setData(res2data);
                     }
-
                 }
             }
             else {
@@ -69,7 +66,7 @@ function OrdersAndReturns() {
         }
     }
         fetchData();
-    }, [location])
+    }, [location,location.search])
 
     console.log(data);
 
