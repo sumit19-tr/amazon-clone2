@@ -22,6 +22,7 @@ const DisplayProductDetails = (props) => {
   const [textType, setTextType] = useState("text-success");
   const [showToast, setShowToast] = useState(false);
   const value = useContext(loginContext);
+  const [loading,setLoading] = useState(false);
 
   const handleAddToCart = async (product) => {
 
@@ -81,15 +82,15 @@ const DisplayProductDetails = (props) => {
 
   const handleBuyNow = (items) => {
     if (value.isLoggedIn || sessionStorage.getItem("login_token")) {
-      navigate(`/order_for?id=${items.productId}`)
+      navigate(`/amazon-clone2/order_for?id=${items.productId}`)
     }
     else {
-      navigate(`/login`);
+      navigate(`/amazon-clone2/login`);
     }
   }
 
-  const renderData = ({ ProductDetails }) => {
-    if (ProductDetails) {
+  const renderData = ({ ProductDetails , loading}) => {
+    if (ProductDetails && !loading) {
       if (ProductDetails.length > 0) {
         return ProductDetails.map((items) => {
 
@@ -159,7 +160,13 @@ const DisplayProductDetails = (props) => {
         )
       }
     } else {
-
+      return(
+        <>
+          <h1>Loading... </h1>
+        </>
+      )
+          
+            
     }
 
   }

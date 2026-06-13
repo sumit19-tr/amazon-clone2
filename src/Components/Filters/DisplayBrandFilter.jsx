@@ -2,8 +2,7 @@ import React from 'react'
 
 const DisplayBrandFilter = (props) => {
 
-    const renderData = ({ brandList ,loading}) => {
-
+    const renderData = ({ brandList,loading }) => {
         if (brandList && !loading) {
             if (brandList.length > 0) {
                 return brandList.map((items) => {
