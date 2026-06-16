@@ -10,67 +10,67 @@ const updateOrderUrl = "https://amazon-clone-restapi.onrender.com/updateOrder";
 function OrdersAndReturns() {
 
     const [data, setData] = useState([]);
-    const [loading,setLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const location = useLocation();
 
     const fetchData = async () => {
 
-            try {
-                setLoading(true);
-                if (location && location.search) {
+        try {
+            setLoading(true);
+            if (location && location.search) {
 
-                    let query = location.search.split('&');
+                let query = location.search.split('&');
 
-                    console.log("query", query);
+                console.log("query", query);
 
 
-                    if (query && query.length >= 4) {
+                if (query && query.length >= 4) {
 
-                        // let update_data = {
-                        //     date: query[2].split('=')[1] || '',
-                        //     paymentId: query[3].split('=')[1].split('_')[1] || '',
-                        //     status: query[0].split('=')[1] || ''
-                        //     // orderId: query[1].split('=')[1] || '',
-                        // }
+                    let update_data = {
+                        date: query[2].split('=')[1] || '',
+                        payment_id: query[3].split('=')[1].split('_')[1] || '',
+                        status: query[0].split('=')[1] || ''
+                        // orderId: query[1].split('=')[1] || '',
+                    }
 
-                        console.log("status", query[0].split('=')[1] || '');
-                        console.log("orderId", query[1].split('=')[1] || '');
-                        console.log("date", query[2].split('=')[1] || '');
-                        console.log("paymentId", query[3].split('=')[1].split('_')[1] || '');
+                    console.log("status", query[0].split('=')[1] || '');
+                    console.log("orderId", query[1].split('=')[1] || '');
+                    console.log("date", query[2].split('=')[1] || '');
+                    console.log("paymentId", query[3].split('=')[1].split('_')[1] || '');
 
-                        const id = query[1].split('=')[1];
+                    const id = query[1].split('=')[1];
 
-                        if (id) {
-                            const res = await axios.put(`${updateOrderUrl}/${id}`, {
-                                date: query[2].split('=')[1] || '',
-                                payment_id: query[3].split('=')[1].split('_')[1] || '',
-                                status: query[0].split('=')[1] || ''
-                            });
-                            const res1 = await res.data;
-                            console.log("data", res1);
-                            const res2 = await axios.get(orderURL);
-                            const res2data = await res2.data;
-                            setData(res2data);
-                        }
+                    if (id) {
+                        const res = await axios.put(`${updateOrderUrl}/${id}`, {
+                            date: query[2].split('=')[1] || '',
+                            payment_id: query[3].split('=')[1].split('_')[1] || '',
+                            status: query[0].split('=')[1] || ''
+                        })
+                        const res1 = await res.data;
+                        console.log("data", res1);
+                        const res2 = await axios.get(orderURL);
+                        const res2data = await res2.data;
+                        setData(res2data);
                     }
                 }
-                else {
-                    const res2 = await axios.get(orderURL);
-                    const res2data = await res2.data;
-                    setData(res2data);
-                }
-            } catch (error) {
-                console.log(error);
             }
-            finally {
-                setLoading(false);
+            else {
+                const res2 = await axios.get(orderURL);
+                const res2data = await res2.data;
+                setData(res2data);
             }
+        } catch (error) {
+            console.log(error);
         }
+        finally {
+            setLoading(false);
+        }
+    }
 
     useEffect(() => {
         fetchData();
-    }, [location, location.search])
+    }, [location])
 
     console.log(data);
 
@@ -127,7 +127,7 @@ function OrdersAndReturns() {
                             </tr>
                         </thead>
                         <tbody>
-                            {renderData(data,loading)}
+                            {renderData(data, loading)}
                         </tbody>
                     </table>
                 </div>
