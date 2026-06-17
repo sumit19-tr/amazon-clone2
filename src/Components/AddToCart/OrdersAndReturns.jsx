@@ -10,7 +10,7 @@ const updateOrderUrl = "https://amazon-clone-restapi.onrender.com/updateOrder";
 function OrdersAndReturns() {
 
     const [data, setData] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     const location = useLocation();
 
@@ -47,8 +47,11 @@ function OrdersAndReturns() {
                             payment_id: query[3].split('=')[1].split('_')[1] || '',
                             status: query[0].split('=')[1] || ''
                         })
+
                         const res1 = await res.data;
                         console.log("data", res1);
+                        // wait 2 seconds
+                        await new Promise(resolve => setTimeout(resolve, 2000));
                         const res2 = await axios.get(orderURL);
                         const res2data = await res2.data;
                         setData(res2data);

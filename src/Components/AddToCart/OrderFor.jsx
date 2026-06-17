@@ -72,55 +72,52 @@ const OrderFor = () => {
             menuItem: idArray.toString(),
             amount: amount
         };
-
         console.log("obj", obj);
-
         try {
-
+            setLoading(true);
             const res = await axios.post(pourl, obj);
             const res1 = await res.data
-            console.log("order placed");
-            console.log(data);
-
+            console.log("order placed",data);
         } catch (error) {
-
             console.log("Error while placing order", error);
-
+        }finally {
+            setLoading(false);
         }
     }
 
     // handlePayment Function
     const handlePayment = async (amount) => {
-        handlePlaceOrder();
+        
+        await handlePlaceOrder();       
         try {
             setLoading(true);
-            const res = await fetch(paymentOrderurl, {
-                method: "POST",
-                headers: {
-                    "content-type": "application/json"
-                },
-                body: JSON.stringify({
-                    amount: amount
-                })
-            });
+            // const res = await fetch(paymentOrderurl, {
+            //     method: "POST",
+            //     headers: {
+            //         "content-type": "application/json"
+            //     },
+            //     body: JSON.stringify({
+            //         amount: amount
+            //     })
+            // });
 
-            const data = await res.json();
+            const res = await axios.post(paymentOrderurl,{amount:amount})
+
+            const data = await res.data;
             console.log(data);
             console.log("Razorpay Order Response:", data);
             console.log("Order ID:", data.data.id);
-            handlePaymentVerify(data.data);
+            await handlePaymentVerify(data.data);
         } catch (error) {
             console.log(error);
         } finally {
-            setLoading(true);
+            setLoading(false);
         }
     }
 
     // handlePaymentVerify Function
     const handlePaymentVerify = async (data) => {
-
         console.log("Received Data:", data);
-
         const options = {
             key: "rzp_test_fUyi5Tb1Uyx1Ro",
             amount: data.amount,
@@ -153,7 +150,6 @@ const OrderFor = () => {
 
                         const date = new Date();
                         const formatedDate = date.toUTCString().split(' ').slice(1, 4).toString().replaceAll(',', '-');
-
                         // this.props.history.push(`/viewBooking?status=${status}&ORDERID=${this.state.orderId}&date=${formatedDate}&PAYMENTID=${response.razorpay_payment_id}`);
                         navigate(`/amazon-clone2/order&returns?status=${status}&ORDERID=${orderId}&date=${formatedDate}&PAYMENTID=${response.razorpay_payment_id}`);
                     }
@@ -218,18 +214,18 @@ const OrderFor = () => {
                         <div className="row mb-4">
                             <div className="col-md-6">
                                 <label className="form-label" required>First Name</label>
-                                <input placeholder="Enter name" id='name' type="name" value={formData.name} onChange={handleChange} className="form-control" required/>
+                                <input placeholder="Enter name" id='name' type="name" value={formData.name} onChange={handleChange} className="form-control" required />
                             </div>
                             <div className="col-md-6">
                                 <label className="form-label" required>Email</label>
-                                <input placeholder="Enter your email" id='email' type="email" value={formData.email} onChange={handleChange} className="form-control" required/>
+                                <input placeholder="Enter your email" id='email' type="email" value={formData.email} onChange={handleChange} className="form-control" required />
                             </div>
                         </div>
 
                         <div className="row mb-5">
                             <div className="col-md-6">
                                 <label className="form-label" required>Phone</label>
-                                <input placeholder="Enter phone number" id='number' type="number" value={formData.number} onChange={handleChange} className="form-control" required/>
+                                <input placeholder="Enter phone number" id='number' type="number" value={formData.number} onChange={handleChange} className="form-control" required />
                             </div>
                             <div className="col-md-6">
                                 <label className="form-label" required>Address</label>
@@ -238,15 +234,15 @@ const OrderFor = () => {
                         </div>
 
                         <div className="mt-4 d-flex gap-3">
-                            <button className="btn edit-btn px-4" style={idArray.length>1 ? {display:"flex"} : {display:"none"}} onClick={() => navigate("/amazon-clone2/add_to_cart")}> Edit Items in cart</button>
-                            <button className="btn edit-btn px-4" style={idArray.length===1 ? {display:"flex"} : {display:"none"}} onClick={() => navigate(-1)}>back</button>
+                            <button className="btn edit-btn px-4" style={idArray.length > 1 ? { display: "flex" } : { display: "none" }} onClick={() => navigate("/amazon-clone2/add_to_cart")}> Edit Items in cart</button>
+                            <button className="btn edit-btn px-4" style={idArray.length === 1 ? { display: "flex" } : { display: "none" }} onClick={() => navigate(-1)}>back</button>
                             <button className="btn order-btn px-4" onClick={() => handlePayment(amount)} >{loading ?
                                 (<>
                                     <span
-                                    className="spinner-border spinner-border-sm me-2"
-                                    role="status"
-                                    aria-hidden="true"
-                                > </span>please wait..        
+                                        className="spinner-border spinner-border-sm me-2"
+                                        role="status"
+                                        aria-hidden="true"
+                                    > </span>please wait..
                                 </>) : "Place Order"} </button>
                         </div>
                     </div>
