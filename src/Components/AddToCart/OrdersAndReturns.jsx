@@ -14,6 +14,7 @@ function OrdersAndReturns() {
 
     const location = useLocation();
 
+
     const fetchData = async () => {
 
         try {
@@ -47,6 +48,7 @@ function OrdersAndReturns() {
                             payment_id: query[3].split('=')[1].split('_')[1] || '',
                             status: query[0].split('=')[1] || ''
                         })
+                        console.log("PUT Response:", res.data);
 
                         const res1 = await res.data;
                         console.log("data res1", res1);
@@ -54,11 +56,7 @@ function OrdersAndReturns() {
                         await new Promise((resolve) => {
                             setTimeout(resolve, 2000);
                         });
-
-                        const res2 = await axios.get(orderURL);
-                        const res2data = await res2.data;
-                        console.log("data res2", res2data);
-                        setData(res2data);
+                        await fetchDataAfterPUT();
                     }
                 }
             }
@@ -76,9 +74,25 @@ function OrdersAndReturns() {
         }
     }
 
+    const fetchDataAfterPUT = async () => {
+        try {
+            setLoading(true);
+            const res2 = await axios.get(orderURL);
+            const res2data = await res2.data;
+            console.log("GET Response:", res2.data);
+            // console.log("data res2", res2data);
+            setData(res2data);
+        } catch (error) {
+            console.log(error);
+        }
+        finally {
+            setLoading(false);
+        }
+    }
+
     useEffect(() => {
         fetchData();
-    }, [location,location.search])
+    }, [location, location.search])
 
     console.log(data);
 
