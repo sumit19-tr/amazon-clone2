@@ -51,7 +51,10 @@ function OrdersAndReturns() {
                         const res1 = await res.data;
                         console.log("data", res1);
                         // wait 2 seconds
-                        await new Promise(resolve => setTimeout(resolve, 2000));
+                        await new Promise((resolve) => {
+                            setTimeout(resolve, 2000);
+                        });
+
                         const res2 = await axios.get(orderURL);
                         const res2data = await res2.data;
                         setData(res2data);
