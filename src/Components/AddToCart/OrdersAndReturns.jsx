@@ -49,7 +49,7 @@ function OrdersAndReturns() {
                         })
 
                         const res1 = await res.data;
-                        console.log("data", res1);
+                        console.log("data res1", res1);
                         // wait 2 seconds
                         await new Promise((resolve) => {
                             setTimeout(resolve, 2000);
@@ -57,6 +57,7 @@ function OrdersAndReturns() {
 
                         const res2 = await axios.get(orderURL);
                         const res2data = await res2.data;
+                        console.log("data res2", res2data);
                         setData(res2data);
                     }
                 }
@@ -64,6 +65,7 @@ function OrdersAndReturns() {
             else {
                 const res2 = await axios.get(orderURL);
                 const res2data = await res2.data;
+                console.log("data res2", res2data);
                 setData(res2data);
             }
         } catch (error) {
@@ -76,7 +78,7 @@ function OrdersAndReturns() {
 
     useEffect(() => {
         fetchData();
-    }, [location])
+    }, [location,location.search])
 
     console.log(data);
 
