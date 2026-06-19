@@ -8,6 +8,7 @@ const paymentOrderurl = "https://razorpay-payment-integration-bx1l.onrender.com/
 const verifyPayurl = "https://razorpay-payment-integration-bx1l.onrender.com/api/payment/verify";
 
 const pourl = "https://amazon-clone-restapi.onrender.com/placeOrder"
+const updateOrderUrl = "https://amazon-clone-restapi.onrender.com/updateOrder";
 
 const OrderFor = () => {
 
@@ -154,7 +155,17 @@ const OrderFor = () => {
                         const formatedDate = date.toUTCString().split(' ').slice(1, 4).toString().replaceAll(',', '-');
                         // this.props.history.push(`/viewBooking?status=${status}&ORDERID=${this.state.orderId}&date=${formatedDate}&PAYMENTID=${response.razorpay_payment_id}`);
 
-                        
+                        let update_data = {
+                        date: formatedDate,
+                        payment_id: response.razorpay_payment_id.split('_')[1] || '',
+                        status: status || ''
+                    }
+
+                    if (orderId) {
+                        const res = await axios.put(`${updateOrderUrl}/${orderId}`,update_data)
+                        const res1 = await res.data;
+                        console.log("PUT Response:", res.data);
+                    }                        
                         navigate(`/amazon-clone2/order&returns?status=${status}&ORDERID=${orderId}&date=${formatedDate}&PAYMENTID=${response.razorpay_payment_id}`);
                     }
                     else {

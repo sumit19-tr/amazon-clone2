@@ -4,7 +4,7 @@ import axios from 'axios'
 import { useLocation } from 'react-router-dom';
 
 const orderURL = `https://amazon-clone-restapi.onrender.com/viewOrders/${sessionStorage.getItem("userInfo")}`;
-const updateOrderUrl = "https://amazon-clone-restapi.onrender.com/updateOrder";
+
 //http://localhost:5173/order&returns?status=ordered&ORDERID=49323&date=2026-05-21&PAYMENTID=pay_SrxP34IWhqr4Nc
 
 function OrdersAndReturns() {
@@ -14,73 +14,12 @@ function OrdersAndReturns() {
 
     const location = useLocation();
 
-
     const fetchData = async () => {
-
-        try {
-            setLoading(true);
-            if (location && location.search) {
-
-                let query = location.search.split('&');
-
-                console.log("query", query);
-
-
-                if (query && query.length >= 4) {
-
-                    let update_data = {
-                        date: query[2].split('=')[1] || '',
-                        payment_id: query[3].split('=')[1].split('_')[1] || '',
-                        status: query[0].split('=')[1] || ''
-                        // orderId: query[1].split('=')[1] || '',
-                    }
-
-                    console.log("status", query[0].split('=')[1] || '');
-                    console.log("orderId", query[1].split('=')[1] || '');
-                    console.log("date", query[2].split('=')[1] || '');
-                    console.log("paymentId", query[3].split('=')[1].split('_')[1] || '');
-
-                    const id = query[1].split('=')[1];
-
-                    if (id) {
-                        const res = await axios.put(`${updateOrderUrl}/${id}`, {
-                            date: query[2].split('=')[1] || '',
-                            payment_id: query[3].split('=')[1].split('_')[1] || '',
-                            status: query[0].split('=')[1] || ''
-                        })
-                        console.log("PUT Response:", res.data);
-
-                        const res1 = await res.data;
-                        console.log("data res1", res1);
-                        // wait 2 seconds
-                        await new Promise((resolve) => {
-                            setTimeout(resolve, 2000);
-                        });
-                        await fetchDataAfterPUT();
-                    }
-                }
-            }
-            else {
-                const res2 = await axios.get(orderURL);
-                const res2data = await res2.data;
-                console.log("data res2", res2data);
-                setData(res2data);
-            }
-        } catch (error) {
-            console.log(error);
-        }
-        finally {
-            setLoading(false);
-        }
-    }
-
-    const fetchDataAfterPUT = async () => {
         try {
             setLoading(true);
             const res2 = await axios.get(orderURL);
             const res2data = await res2.data;
-            console.log("GET Response:", res2.data);
-            // console.log("data res2", res2data);
+            console.log("data res2", res2data);
             setData(res2data);
         } catch (error) {
             console.log(error);
