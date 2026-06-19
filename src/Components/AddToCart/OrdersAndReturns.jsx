@@ -19,6 +19,8 @@ function OrdersAndReturns() {
             setLoading(true);
             const res2 = await axios.get(orderURL);
             const res2data = await res2.data;
+            console.log("userInfo =", sessionStorage.getItem("userInfo"));
+            console.log("GET URL =", orderURL);
             console.log("data res2", res2data);
             setData(res2data);
         } catch (error) {
