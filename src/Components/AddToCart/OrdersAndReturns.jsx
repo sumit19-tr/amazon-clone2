@@ -3,7 +3,7 @@ import "./OrdersAndReturns.css"
 import axios from 'axios'
 import { useLocation } from 'react-router-dom';
 
-const orderURL = `https://amazon-clone-restapi.onrender.com/viewOrders/${sessionStorage.getItem("userInfo")}`;
+const orderURL = `https://amazon-clone-restapi.onrender.com/viewOrders`;
 
 //http://localhost:5173/order&returns?status=ordered&ORDERID=49323&date=2026-05-21&PAYMENTID=pay_SrxP34IWhqr4Nc
 
@@ -17,7 +17,7 @@ function OrdersAndReturns() {
     const fetchData = async () => {
         try {
             setLoading(true);
-            const res2 = await axios.get(orderURL);
+            const res2 = await axios.get(`orderURL/${sessionStorage.getItem("userInfo")}`);
             const res2data = await res2.data;
             console.log("userInfo =", sessionStorage.getItem("userInfo"));
             console.log("GET URL =", orderURL);
