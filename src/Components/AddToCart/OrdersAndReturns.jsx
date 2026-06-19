@@ -31,7 +31,7 @@ function OrdersAndReturns() {
 
     useEffect(() => {
         fetchData();
-    }, [location, location.search])
+    }, [1])
 
     console.log(data);
 
