@@ -14,30 +14,6 @@ function OrdersAndReturns() {
 
     const location = useLocation();
 
-
-    // const fetchData = async () => {
-
-    //     try {
-    //         setLoading(true);
-    //         const res2 = await axios.get(orderURL);
-    //         const res2data = await res2.data;
-    //         console.log("data res2", res2data);
-    //         if (res2data.length > 0) {
-    //             setData(res2data);
-    //         }
-    //         else {
-    //             return (<>
-    //                 <h1> no data found </h1>
-    //             </>)
-    //         }
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    //     finally {
-    //         setLoading(false);
-    //     }
-    // }
-
     const fetchData = async () => {
         try {
             setLoading(true);

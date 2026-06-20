@@ -8,7 +8,7 @@ const paymentOrderurl = "https://razorpay-payment-integration-bx1l.onrender.com/
 const verifyPayurl = "https://razorpay-payment-integration-bx1l.onrender.com/api/payment/verify";
 
 const pourl = "https://amazon-clone-restapi.onrender.com/placeOrder"
-const updateOrderUrl = "https://amazon-clone-restapi.onrender.com/updateOrder";
+
 
 const OrderFor = () => {
 
@@ -78,31 +78,20 @@ const OrderFor = () => {
             setLoading(true);
             const res = await axios.post(pourl, obj);
             const res1 = await res.data
-            console.log("order placed",data);
+            console.log("order placed", data);
         } catch (error) {
             console.log("Error while placing order", error);
-        }finally {
+        } finally {
             setLoading(false);
         }
     }
 
     // handlePayment Function
     const handlePayment = async (amount) => {
-        
-               
         try {
             setLoading(true);
-            // const res = await fetch(paymentOrderurl, {
-            //     method: "POST",
-            //     headers: {
-            //         "content-type": "application/json"
-            //     },
-            //     body: JSON.stringify({
-            //         amount: amount
-            //     })
-            // });
 
-            const res = await axios.post(paymentOrderurl,{amount:amount})
+            const res = await axios.post(paymentOrderurl, { amount: amount })
 
             const data = await res.data;
             console.log(data);
@@ -155,24 +144,12 @@ const OrderFor = () => {
                         const formatedDate = date.toUTCString().split(' ').slice(1, 4).toString().replaceAll(',', '-');
                         // this.props.history.push(`/viewBooking?status=${status}&ORDERID=${this.state.orderId}&date=${formatedDate}&PAYMENTID=${response.razorpay_payment_id}`);
 
-                    //     let update_data = {
-                    //     date: formatedDate,
-                    //     payment_id: response.razorpay_payment_id.split('_')[1] || '',
-                    //     status: status || ''
-                    // }
 
-                    // if (orderId) {
-                    //     const res = await axios.put(`${updateOrderUrl}/${orderId}`,update_data)
-                    //     const res1 = await res.data;
-                    //     console.log("PUT Response:", res.data);
-                    // }                        
                         navigate(`/amazon-clone2/order&returns?status=${status}&ORDERID=${orderId}&date=${formatedDate}&PAYMENTID=${response.razorpay_payment_id}`);
                     }
                     else {
                         toast.error("Payment verification failed.");
                     }
-
-
                 } catch (error) {
                     // //console.log(error);
                     console.error("Error during payment verification:", error);
@@ -190,7 +167,7 @@ const OrderFor = () => {
 
     const renderItems = (data) => {
 
-        if (data) {
+        if (data && loading) {
             if (data.length > 0) {
                 return data.map((item) => {
                     return (
@@ -208,13 +185,22 @@ const OrderFor = () => {
                     )
                 })
             }
+            else {
+                return (
+                    <>
+                        <h1>No data found </h1>
+                    </>
+                )
+            }
+        }
+        else {
+            return (
+                <>
+                    <h1>Loading ...</h1>
+                </>
+            )
         }
 
-        return (
-            <>
-
-            </>
-        )
     }
 
     return (
@@ -272,7 +258,6 @@ const OrderFor = () => {
                     </div>
                 </div>
             </div>
-
         </>
     )
 }
