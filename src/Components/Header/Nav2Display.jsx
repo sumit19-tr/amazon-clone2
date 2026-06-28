@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import './Nav2Display.css'
 
 const Nav2Display = (props) => {
 
@@ -27,7 +28,25 @@ const Nav2Display = (props) => {
         else {
             return (
                 <>
-                    <h1>Loading...</h1>
+                    <li className="nav-item placeholder-glow" >
+                        <Link className="nav-link placeholder">
+                        </Link>
+                    </li>
+                    <li className="nav-item placeholder-glow" >
+                        <Link className="nav-link placeholder">
+                        </Link>
+                    </li>
+                    <li className="nav-item placeholder-glow" >
+                        <Link className="nav-link placeholder">
+                        </Link>
+                    </li><li className="nav-item placeholder-glow" >
+                        <Link className="nav-link placeholder">
+                        </Link>
+                    </li>
+                    <li className="nav-item placeholder-glow" >
+                        <Link className="nav-link placeholder">
+                        </Link>
+                    </li>
                 </>
             )
         }

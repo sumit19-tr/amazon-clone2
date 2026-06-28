@@ -13,7 +13,7 @@ const Section2 = () => {
                             src="https://i.ibb.co/r2hfG7GJ/7-SY608-CB800961223.jpg"
                             alt="Headphone_image"
                         />
-                        <a href="">Shop Now</a>
+                        <a href="/amazon-clone2/products/3">Shop Now</a>
                     </div>
                     {/* card 2 */}
                     <div className="card">
@@ -52,7 +52,7 @@ const Section2 = () => {
                                 <p>Sports &amp; fitness</p>
                             </div>
                         </div>
-                        <a href="">Explore all</a>
+                        <a href="/amazon-clone2/products/3">Explore all</a>
                     </div>
                     {/* card 3 */}
                     <div className="card s_card">
@@ -93,7 +93,7 @@ const Section2 = () => {
                                 <p>Bags &amp; wallet</p>
                             </div>
                         </div>
-                        <a href="">Mega Fashion Days</a>
+                        <a href="/amazon-clone2/products/3">Mega Fashion Days</a>
                     </div>
                      <div className="card s_card s_cardDisplay">
                         <div className="cardHeading ">Up to 70% off | Styles for men</div>
@@ -133,7 +133,7 @@ const Section2 = () => {
                                 <p>Bags &amp; wallet</p>
                             </div>
                         </div>
-                        <a href="">Mega Fashion Days</a>
+                        <a href="/amazon-clone2/products/3">Mega Fashion Days</a>
                     </div>
                 </div>
             </>

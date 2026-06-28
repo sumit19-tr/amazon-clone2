@@ -1,0 +1,125 @@
+/* Extra small devices (phones, less than 576px) */
+@media (max-width: 575.98px) {
+  .check_breakpoints {
+    background-color: pink;
+  }
+
+  .placeholder {
+    display: inline-block;
+    min-height: 1.6em;
+    vertical-align: middle;
+    cursor: wait;
+    background-color: currentcolor;
+    opacity: .5;
+    margin-left: 5px;
+    border-radius: 0.25rem;
+    width: 67vw;
+    margin-top: 6px;
+}
+}
+
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+  .check_breakpoints {
+    background-color: red;
+  }
+
+  .placeholder {
+    display: inline-block;
+    min-height: 1.6em;
+    vertical-align: middle;
+    cursor: wait;
+    background-color: currentcolor;
+    opacity: .5;
+    margin-left: 5px;
+    width: 9vw;
+    border-radius: 0.25rem;
+}
+
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  
+  .check_breakpoints {
+    background-color: green;
+  }
+
+  .placeholder {
+    display: inline-block;
+    min-height: 1.6em;
+    vertical-align: middle;
+    cursor: wait;
+    background-color: currentcolor;
+    opacity: .5;
+    margin-left: 5px;
+    width: 9vw;
+    border-radius: 0.25rem;
+}
+
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+
+  .check_breakpoints {
+    background-color: blue;
+  }
+
+  .placeholder {
+    display: inline-block;
+    min-height: 1.6em;
+    vertical-align: middle;
+    cursor: wait;
+    background-color: currentcolor;
+    opacity: .5;
+    margin-left: 5px;
+    width: 9vw;
+    border-radius: 0.25rem;
+}
+
+}
+
+
+
+/* X-Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  .check_breakpoints {
+    background-color: black;
+  }
+
+  .placeholder {
+    display: inline-block;
+    min-height: 1.6em;
+    vertical-align: middle;
+    cursor: wait;
+    background-color: currentcolor;
+    opacity: .5;
+    margin-left: 5px;
+    width: 9vw;
+    border-radius: 0.25rem;
+}
+
+}
+
+/* XX-Large devices (larger desktops, 1400px and up) */
+@media (min-width: 1400px) {
+  .check_breakpoints {
+    background-color: orangered;
+  }
+
+  .placeholder {
+    display: inline-block;
+    min-height: 1.6em;
+    vertical-align: middle;
+    cursor: wait;
+    background-color: currentcolor;
+    opacity: .5;
+    margin-left: 5px;
+    width: 9vw;
+    border-radius: 0.25rem;
+}
+
+}
+
