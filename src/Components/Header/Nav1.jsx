@@ -221,6 +221,9 @@ const Nav1 = () => {
                                     aria-label="Close"
                                 />
                             </div>
+                            <div class="modal-body">
+                                This feature is under development.
+                            </div>
                             <div className="modal-footer">
                                 <button
                                     type="button"
