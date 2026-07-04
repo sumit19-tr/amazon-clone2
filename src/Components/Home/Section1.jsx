@@ -77,7 +77,8 @@ const Section1 = () => {
     return (
         <div className="quickLink">
             <div className="quickLink-left">
-                <h2>Amazon Fashion</h2>
+                <h2 data-bs-toggle="modal"
+                    data-bs-target="#ComingSoonModal">Amazon Fashion</h2>
                 <ul>
                     {categoriesList(category, loading)}
                 </ul>

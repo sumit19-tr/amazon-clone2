@@ -12,6 +12,7 @@ import Product from "./ListOfProduct/Product";
 import Register from "./Login/Register";
 import { cartContext,loginContext } from "./context/context";
 import { useState } from "react";
+import ComingSoon from "./ComingSoon/ComingSoon";
 
 
 const Routing = () => {
@@ -36,6 +37,7 @@ const Routing = () => {
             </Routes>
             </cartContext.Provider>
             </loginContext.Provider>
+            <ComingSoon/>
             {/* <Footer/> */}
         </>
     )

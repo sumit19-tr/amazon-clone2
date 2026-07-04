@@ -63,7 +63,8 @@ const Nav2Display = (props) => {
                 >
                     <span className="navbar-toggler-icon" />
                 </button>
-                <a className="navbar-brand S_border" href="javascript:void(0)">
+                <a className="navbar-brand S_border" href="javascript:void(0)" data-bs-toggle="modal"
+                    data-bs-target="#ComingSoonModal">
                     All
                 </a>
                 <div className="collapse navbar-collapse" id="mynavbar">
@@ -73,6 +74,8 @@ const Nav2Display = (props) => {
                             <a
                                 className="nav-link S_nav-link S_border"
                                 href="javascript:void(0)"
+                                data-bs-toggle="modal"
+                                data-bs-target="#ComingSoonModal"
                             >
                                 Amazon miniTV
                             </a>

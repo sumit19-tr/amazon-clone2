@@ -3,7 +3,6 @@ import { useContext, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { cartContext, loginContext } from "../context/context";
 import SearchBar from "./SearchBar";
-
 const getUserData_url = "https://amazonclone-loginapi.onrender.com/api/auth/userinfo";
 
 const Nav1 = () => {
@@ -120,7 +119,7 @@ const Nav1 = () => {
             return (
                 <>
                     <div className="choose_country S_border" data-bs-toggle="modal"
-                        data-bs-target="#exampleModal">
+                        data-bs-target="#ComingSoonModal">
                         <img src="https://flagcdn.com/w20/in.png" alt="India flag" height={20} /> IN
                         EN US
                     </div>
@@ -154,7 +153,7 @@ const Nav1 = () => {
                 </Link>
                 {/* Location */}
                 <div className="set_location S_ln-height S_border" data-bs-toggle="modal"
-                    data-bs-target="#exampleModal">
+                    data-bs-target="#ComingSoonModal">
                     <p className="first-line">Delivering to 800020</p>
                     <p className="second-line">
                         <i className="fa-solid fa-location-dot" />
@@ -197,47 +196,7 @@ const Nav1 = () => {
                         </p>
                     </div>
                 </Link>
-            </nav>
-            <>
-
-                {/* Modal */}
-                <div
-                    className="modal fade"
-                    id="exampleModal"
-                    tabIndex={-1}
-                    aria-labelledby="exampleModalLabel"
-                    aria-hidden="true"
-                >
-                    <div className="modal-dialog modal-dialog-centered">
-                        <div className="modal-content">
-                            <div className="modal-header">
-                                <h1 className="modal-title fs-5" id="exampleModalLabel">
-                                    🚀 Coming Soon!
-                                </h1>
-                                <button
-                                    type="button"
-                                    className="btn-close"
-                                    data-bs-dismiss="modal"
-                                    aria-label="Close"
-                                />
-                            </div>
-                            <div class="modal-body">
-                                This feature is under development.
-                            </div>
-                            <div className="modal-footer">
-                                <button
-                                    type="button"
-                                    className="btn btn-secondary"
-                                    data-bs-dismiss="modal"
-                                >
-                                    Close
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </>
-
+            </nav>              
         </>
     )
 }

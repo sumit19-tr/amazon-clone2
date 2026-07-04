@@ -80,7 +80,7 @@ function SearchBar() {
 
     const handleClick = (id,name) => {
         setOnFocusDisplay({ display: "none" } );
-        navigation(`productDetails/${id}`);
+        navigation(`/amazon-clone2/productDetails/${id}`);
         setUpdatedValue(name);
         var id =id;
         var name = name;
