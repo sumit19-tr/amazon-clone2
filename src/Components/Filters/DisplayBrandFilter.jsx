@@ -26,7 +26,21 @@ const DisplayBrandFilter = (props) => {
         else{
             return (
                     <>
-                        <h1>Loading...</h1>
+                        <li>
+                            <label className='placeholder-glow'>
+                                <input  className='placeholder'/>   
+                            </label>
+                        </li>
+                         <li>
+                            <label className='placeholder-glow'>
+                                <input  className='placeholder'/>   
+                            </label>
+                        </li>
+                         <li>
+                            <label className='placeholder-glow'>
+                                <input  className='placeholder'/>   
+                            </label>
+                        </li>
                     </>
                 )   
         }
